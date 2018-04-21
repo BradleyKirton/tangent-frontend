@@ -1,12 +1,18 @@
+<div
+	*ngIf="(profileService.userProfile|async)?.user.first_name"
+	class="row">
+	<h1 class="col-sm h1">
+		{{ (profileService.userProfile|async)?.user.first_name }} {{ (profileService.userProfile|async)?.user.last_name }}
+	</h1>
+</div>
+
 <div class="row">
-	
 	<div class="col-sm-4">
 	    <div class="card">
-	        
-	        <div class="card-header">
-	            {{ (profileService.userProfile|async)?.user.first_name }} {{ (profileService.userProfile|async)?.user.last_name }}
-	        </div>
-	        
+            <div class="card-header">
+                About
+            </div>
+
 	        <div class="card-block">
 	            
 	            <div class="card-media-block">    
@@ -21,20 +27,104 @@
 
 	              			{{ (profileService.userProfile|async)?.user.username }}
 	                    </span>
-	                    
-	                    <span class="card-media-text">
-	                        {{ (profileService.userProfile|async)?.user.email }}
-	                    </span>
+
+                        <span class="card-media-text">
+                            <a
+                            	*ngIf="(profileService.userProfile|async)?.user.email"
+                            	target="blank_"
+                            	href="mailto:{{ (profileService.userProfile|async)?.user.email }}">
+                            	{{ (profileService.userProfile|async)?.user.email }}
+                            </a>
+                        </span>
+
+                        <span 
+                        	*ngIf="(profileService.userProfile|async)?.github_user"
+                        	class="card-media-text">
+                            <a
+                            	target="blank_"
+                            	href="https://github.com/{{ (profileService.userProfile|async)?.github_user }}">
+                            	@github
+                            </a>
+                        </span>
 	                </div>
 	            </div>
+	        
+	            <div class="card-text">
+	                {{ (profileService.userProfile|async)?.about_me }}
+	            </div>
 
-                <div class="card-text">
-                    {{ (profileService.userProfile|async)?.about_me }}
-                </div>
 	        </div>
 	    </div>
 	</div>
 
-	
+	<div class="col-sm">
+			<div class="row">
+				<div class="card">
+				    <div class="card-block">
+				        <h4 class="card-title">Details</h4>
+				    </div>
+				    <ul class="list-group list-group-flush">
+				        <li class="list-group-item">
+							<p class="p1"> 
+								<strong>Phone</strong>
+							 	{{ (profileService.userProfile|async)?.phone_number }}
+							 </p>
+				        </li>
 
+				        <li class="list-group-item">
+							<p class="p1">
+								<strong>Race</strong>
+								{{ (profileService.userProfile|async)?.race }}
+							</p>
+				        </li>
+
+				        <li class="list-group-item">
+							<p class="p1">
+								<strong>Gender</strong>
+								{{ (profileService.userProfile|async)?.gender }}
+							</p>
+				        </li>
+
+				        <li class="list-group-item">
+							<p class="p1">
+								<strong>Age</strong>
+								{{ (profileService.userProfile|async)?.age }}
+							</p>
+				        </li>
+
+				        <li class="list-group-item">
+							<p class="p1">
+								<strong>Birthday</strong>
+								{{ (profileService.userProfile|async)?.birth_date }}
+							</p>
+				        </li>
+
+				    </ul>
+				</div>
+			</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<clr-datagrid>
+		    <clr-dg-column>ID</clr-dg-column>
+		    <clr-dg-column>Name</clr-dg-column>
+		    <clr-dg-column>Level</clr-dg-column>
+		    <clr-dg-column>Link</clr-dg-column>
+
+		    <clr-dg-placeholder>No positions yet, go update your data!</clr-dg-placeholder>
+
+		    <clr-dg-row *ngFor="let position of (profileService.userProfile|async)?.positions">
+		        <clr-dg-cell>{{ position.position.id }}</clr-dg-cell>
+		        <clr-dg-cell>{{ position.position.name }}</clr-dg-cell>
+		        <clr-dg-cell>{{ position.position.level }}</clr-dg-cell>
+		        <clr-dg-cell>
+		        	<a href="{{position.url}}">{{ position.url }}</a>
+		        </clr-dg-cell>
+		    </clr-dg-row>
+
+		    <clr-dg-footer>{{ (profileService.userProfile|async)?.positions.length }} positions</clr-dg-footer>
+		</clr-datagrid>
+	</div>
 </div>

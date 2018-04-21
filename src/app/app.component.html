@@ -27,14 +27,14 @@
         <nav class="sidenav">
             <section class="sidenav-content">
                 <a 
-                    *ngIf="(user.me | async)?.is_staff" 
+                    *ngIf="(user.me | async)?.is_superuser" 
                     routerLink="/admin"
                     routerLinkActive="active"
                     class="nav-link">Admin
                 </a>
                 
                 <a 
-                    *ngIf="(user.me | async)?.is_staff" 
+                    *ngIf="(user.me | async)?.is_superuser" 
                     routerLink="/dashboard"
                     routerLinkActive="active"
                     class="nav-link">Dashboard

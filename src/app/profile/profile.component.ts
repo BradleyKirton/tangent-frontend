@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
 					}
 
 					return false;
-				});
+				})[0];
 
 				this.userProfile = Observable.create( (observer) => {
 					observer.next(profile);

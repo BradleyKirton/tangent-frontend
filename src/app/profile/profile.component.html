@@ -15,25 +15,24 @@
 	                <div class="card-media-description">
 	                    <span class="card-media-title">
 		                    <clr-icon
-		                    	*ngIf="(userService.me|async)?.is_superuser"
+		                    	*ngIf="(userProfile|async)?.user.is_superuser"
 		                    	shape="administrator">	
 		                    </clr-icon>
 
-	              			{{ (userService.me|async)?.username }}
+	              			{{ (userProfile|async)?.user.username }}
 	                    </span>
 	                    
 	                    <span class="card-media-text">
-	                        {{ (userService.me|async)?.email }}
+	                        {{ (userProfile|async)?.user.email }}
 	                    </span>
 	                </div>
 	            </div>
 
+                <div class="card-text">
+                    {{ (userProfile|async)?.about_me }}
+                </div>
+
 	        </div>
-	
-	        <div class="card-footer">
-	            <button class="btn btn-sm btn-link">Action</button>
-	        </div>
-	
 	    </div>
 	</div>
 

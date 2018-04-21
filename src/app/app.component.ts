@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from './user.service';
 import { User } from './models';
 
@@ -19,13 +19,26 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // Keep track of the last route navigated to by the user
+    this.router.events.subscribe( (event) => {
+      if (event instanceof NavigationEnd) {
+        localStorage.setItem("last-route", event.url);
+      }
+    });
+
   	this.userService.isAuthenticated.subscribe( (isAuthenticated) => {
   		if (!isAuthenticated) {
   			this.router.navigate(['login']);
   		} else {
   			this.userService.me.subscribe( (user: User) => {
+          let lastRoute = localStorage.getItem("last-route");
+
           if (user.is_superuser) {
-            this.router.navigate(['admin']);
+            if (lastRoute != null) {
+              this.router.navigateByUrl(lastRoute)
+            } else {
+              this.router.navigate(['admin']);
+            }
           } else {
             this.router.navigate(['profile']);
           }

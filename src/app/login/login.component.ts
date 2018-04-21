@@ -10,14 +10,13 @@ import { UserService } from '../user.service';
 export class LoginComponent implements OnInit {
   username: string;
   password: string;
-  rememberMe: boolean;
-  
+  remember: boolean;
+
   constructor(private user: UserService) { }
 
   ngOnInit() { }
 
-  login(username: string, password: string) {
-  	console.log(username, password)
-  	this.user.authenticate(username, password);
+  login(username: string, password: string, remember: boolean) {
+  	this.user.login(username, password, remember);
   }
 }

@@ -22,7 +22,7 @@
 
 			<div class="checkbox">
 				<input
-					[(ngModel)]="rememberMe"
+					[(ngModel)]="remember"
 					id="remember-me"
 					name="remember-me"
 					type="checkbox">
@@ -30,9 +30,15 @@
 				<label for="remember-me">Rememer me?</label>
 			</div>
 
+            <div
+            	*ngIf="errorMessage"
+            	class="error active">
+                {{ user.authenticationError | async }}
+            </div>
+
 			<button
 				class="btn btn-primary"
-				(click)="login(username, password)">Login
+				(click)="login(username,password,remember)">Login
 			</button>
 
 		</div>

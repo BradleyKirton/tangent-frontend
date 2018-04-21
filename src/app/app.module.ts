@@ -3,11 +3,21 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ClarityModule } from "@clr/angular";
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserService } from './user.service';
+import { ProfileComponent } from './profile/profile.component';
+
+
+const routes: Routes = [
+  {path: 'login', component: LoginComponent},
+  {path: 'admin', component: AdminComponent},
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'profile', component: ProfileComponent}
+]
 
 
 @NgModule({
@@ -15,13 +25,15 @@ import { UserService } from './user.service';
     AppComponent,
     LoginComponent,
     AdminComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     ClarityModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [
     UserService

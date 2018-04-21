@@ -12,6 +12,7 @@ export class UserService {
 	authenticationError: BehaviorSubject<Error> = new BehaviorSubject(null);
   me: Observable<User>;
   profiles: Observable<Profile[]>;
+  picture: Observable<string>;
 
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem("tangent-key");
@@ -27,6 +28,7 @@ export class UserService {
       .subscribe( (isAuthenticated) => {
         this.refreshUser();
         this.refreshProfiles();
+        this.refreshProfilePic();
     });
   }
   
@@ -37,6 +39,18 @@ export class UserService {
     return {
       'Authorization': `Token ${this.token}`
     };
+  }
+
+  /**
+    Fetch a random profile pic for the user
+  */
+  refreshProfilePic() {
+    this.http.get('https://randomuser.me/api/')
+      .subscribe( (response: any) => {
+        this.picture = Observable.create( (observer) => {
+          observer.next(response.results[0].picture.large);
+        });
+      })
   }
 
   /**

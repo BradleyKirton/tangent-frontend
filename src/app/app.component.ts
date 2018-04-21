@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
   			this.router.navigate(['login']);
   		} else {
   			this.userService.me.subscribe( (user: User) => {
-          console.log(user.is_superuser)
           if (user.is_superuser) {
             this.router.navigate(['admin']);
           } else {

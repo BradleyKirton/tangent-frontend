@@ -120,6 +120,7 @@ export interface IProfile {
 	age: number;
 	years_worked: number;
 	days_to_birthday: number;
+	about_me: string;
 	positions: IPosition[];
 	add_position: string;
 	url: string;
@@ -138,6 +139,7 @@ export class Profile implements IProfile {
 	age: number;
 	years_worked: number;
 	days_to_birthday: number;
+	about_me: string;
 	positions: Position[];
 	add_position: string;
 	url: string;

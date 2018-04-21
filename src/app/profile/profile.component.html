@@ -4,32 +4,32 @@
 	    <div class="card">
 	        
 	        <div class="card-header">
-	            {{ (userService.me|async)?.first_name }} {{ (userService.me|async)?.last_name }}
+	            {{ (profileService.userProfile|async)?.user.first_name }} {{ (profileService.userProfile|async)?.user.last_name }}
 	        </div>
 	        
 	        <div class="card-block">
 	            
 	            <div class="card-media-block">    
-	                <img src="{{userService.picture|async}}">
+	                <img src="{{profileService.userService.picture|async}}">
 
 	                <div class="card-media-description">
 	                    <span class="card-media-title">
 		                    <clr-icon
-		                    	*ngIf="(userProfile|async)?.user.is_superuser"
+		                    	*ngIf="(profileService.userProfile|async)?.user.is_superuser"
 		                    	shape="administrator">	
 		                    </clr-icon>
 
-	              			{{ (userProfile|async)?.user.username }}
+	              			{{ (profileService.userProfile|async)?.user.username }}
 	                    </span>
 	                    
 	                    <span class="card-media-text">
-	                        {{ (userProfile|async)?.user.email }}
+	                        {{ (profileService.userProfile|async)?.user.email }}
 	                    </span>
 	                </div>
 	            </div>
 
                 <div class="card-text">
-                    {{ (userProfile|async)?.about_me }}
+                    {{ (profileService.userProfile|async)?.about_me }}
                 </div>
 
 	        </div>

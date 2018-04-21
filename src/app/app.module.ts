@@ -8,8 +8,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { UserService } from './user.service';
 import { ProfileComponent } from './profile/profile.component';
+import { UserService } from './user.service';
+import { ProfileService } from './profile.service';
 
 
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
-    UserService
+    UserService,
+    ProfileService
   ],
   bootstrap: [AppComponent]
 })

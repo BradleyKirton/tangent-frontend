@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // Keep track of the last route navigated to by the user
     this.router.events.subscribe( (event) => {
-      if (event instanceof NavigationEnd) {
+      if (event instanceof NavigationEnd && event.url.slice(1) != "login") {
         localStorage.setItem("last-route", event.url);
       }
     });

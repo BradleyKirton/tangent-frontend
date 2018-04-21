@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
 import { User, Profile } from './models';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 
 /**
@@ -12,26 +12,38 @@ import { Observable } from 'rxjs';
 */
 @Injectable()
 export class ProfileService {
-	userProfile: Observable<Profile>;
+	userProfile: BehaviorSubject<Profile> = new BehaviorSubject(null);
 
   constructor(private userService: UserService) {
-    // Set the initial profile to the current user
-    this.userService.me.subscribe( (user: User) => {
-      this.filterForUser(user);
-    })
+    // Clear the profile
+    this.userService.isAuthenticated.subscribe( (isAuthenticated: boolean) => {
+      if (!isAuthenticated) {
+        this.userProfile.next(null);
+      } else {
+        // Set the initial profile to the current user
+        this.userService.me.subscribe( (user: User) => {
+          this.filterForUser(user);
+        });
+      }
+    });
   }
 
+  /**
+    Filter the employee profiles exposed in the user service on the specified user
+
+    @param user  A user object
+  */
   filterForUser(user: User): void {
   	this.userService.profiles.subscribe( (profiles) => {
   		let filteredProfiles = profiles.filter( (profile: Profile) => {
         if (profile.user != null) {
           return profile.user.username == user.username;
         }
-  		});
 
-      this.userProfile = Observable.create( (observer) => {
-        observer.next(filteredProfiles[0]);
-      });
+        return false;
+  		});
+      
+      this.userProfile.next(filteredProfiles[0])
   	});
   }
 }

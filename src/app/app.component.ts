@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
+import { User } from './models';
 
 
 @Component({
@@ -13,16 +14,23 @@ export class AppComponent implements OnInit {
 	showLogin: boolean = true;
 
   constructor(
-  	private user: UserService,
+  	private userService: UserService,
   	private router: Router
   ) { }
 
   ngOnInit() {
-  	this.user.isAuthenticated.subscribe( (isAuthenticated) => {
+  	this.userService.isAuthenticated.subscribe( (isAuthenticated) => {
   		if (!isAuthenticated) {
   			this.router.navigate(['login']);
   		} else {
-  			this.router.navigate(['admin']);
+  			this.userService.me.subscribe( (user: User) => {
+          console.log(user.is_superuser)
+          if (user.is_superuser) {
+            this.router.navigate(['admin']);
+          } else {
+            this.router.navigate(['profile']);
+          }
+        });
   		}
 
   		this.showLogin = !isAuthenticated;

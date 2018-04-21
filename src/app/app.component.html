@@ -13,7 +13,7 @@
                 </button>
                 <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
                     <a routerLink="/profile" clrDropdownItem>Account</a>
-                    <a (click)="user.logout()" clrDropdownItem>Log out</a>
+                    <a (click)="userService.logout()" clrDropdownItem>Log out</a>
                 </clr-dropdown-menu>
             </clr-dropdown>
         </div>
@@ -27,14 +27,14 @@
         <nav class="sidenav">
             <section class="sidenav-content">
                 <a 
-                    *ngIf="(user.me | async)?.is_superuser" 
+                    *ngIf="(userService.me | async)?.is_superuser" 
                     routerLink="/admin"
                     routerLinkActive="active"
                     class="nav-link">Admin
                 </a>
                 
                 <a 
-                    *ngIf="(user.me | async)?.is_superuser" 
+                    *ngIf="(userService.me | async)?.is_superuser" 
                     routerLink="/dashboard"
                     routerLinkActive="active"
                     class="nav-link">Dashboard

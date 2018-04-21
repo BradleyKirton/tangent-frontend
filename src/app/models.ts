@@ -16,6 +16,7 @@ export interface IUser {
 	last_name: string;
 	is_active: boolean;
 	is_staff: boolean;
+	is_superuser: boolean;
 	url: string;
 }
 
@@ -28,6 +29,7 @@ export class User implements IUser {
 	last_name: string;
 	is_active: boolean;
 	is_staff: boolean;
+	is_superuser: boolean;
 	url: string;
 }
 

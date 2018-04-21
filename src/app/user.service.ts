@@ -44,13 +44,21 @@ export class UserService {
   /**
     Fetch a random profile pic for the user
   */
-  refreshProfilePic() {
+  getProfilePic() {
+    let subject = new BehaviorSubject(null);
     this.http.get('https://randomuser.me/api/')
       .subscribe( (response: any) => {
-        this.picture = Observable.create( (observer) => {
-          observer.next(response.results[0].picture.large);
-        });
+        subject.next(response.results[0].picture.large);
       })
+
+    return subject
+  }
+  
+  /**
+    Refresh the service picture
+  */
+  refreshProfilePic() {
+    this.picture = this.getProfilePic();
   }
 
   /**

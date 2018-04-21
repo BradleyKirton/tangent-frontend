@@ -1,0 +1,56 @@
+<div class="row">
+
+		<div
+			*ngFor="let profile of userService.profiles|async" 
+			class="col-sm-4">
+
+		    <div class="card">
+	            <div class="card-header">
+	            	<button
+	            		class="btn btn-link"
+	            		(click)="viewProfile(profile)">
+	            		
+	                    <clr-icon
+	                    	*ngIf="profile.user.is_superuser"
+	                    	shape="administrator">	
+	                    </clr-icon>
+	            		
+	            		{{ profile.user.username }}
+	            	</button>
+	            </div>
+
+		        <div class="card-block">
+		            
+		            <div class="card-media-block">    
+		                <img src="{{ userService.picture|async }}">
+
+		                <div class="card-media-description">
+		                    <span class="card-media-title">
+		              			{{ profile.user.first_name }} {{ profile.user.last_name }}
+		                    </span>
+
+	                        <span class="card-media-text">
+	                            <a
+	                            	*ngIf="profile.user.email"
+	                            	target="blank_"
+	                            	href="mailto:{{ profile.user.email }}">
+	                            	{{ profile.user.email }}
+	                            </a>
+	                        </span>
+
+	                        <span 
+	                        	*ngIf="profile.github_user"
+	                        	class="card-media-text">
+	                            <a
+	                            	target="blank_"
+	                            	href="https://github.com/{{ profile.github_user }}">
+	                            	@github
+	                            </a>
+	                        </span>
+		                </div>
+		            </div>
+
+		        </div>
+		    </div>
+	    </div>
+</div>

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from '../user.service';
+import { ProfileService } from '../profile.service';
+import { Profile } from '../models';
+
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +12,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+  	private router: Router,
+  	private userService: UserService,
+  	private profileService: ProfileService) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  viewProfile(profile: Profile) {
+  	this.profileService.userProfile.next(profile);
+  	this.router.navigate(['profile']);
   }
 
 }

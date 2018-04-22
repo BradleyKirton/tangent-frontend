@@ -9,9 +9,7 @@
 <div class="row">
 	<div class="col-sm-4">
 	    <div class="card">
-            <div class="card-header">
-                About
-            </div>
+            <div class="card-header">About Me</div>
 
 	        <div class="card-block">
 	            
@@ -107,18 +105,25 @@
 
 <div class="row">
 	<div class="col-sm-12">
+		<h1 class="h1">Position History</h1>
+	</div>
+
+	<div class="col-sm-12">
 		<clr-datagrid>
 		    <clr-dg-column>ID</clr-dg-column>
 		    <clr-dg-column>Name</clr-dg-column>
 		    <clr-dg-column>Level</clr-dg-column>
+		    <clr-dg-column>Current</clr-dg-column>
 		    <clr-dg-column>Link</clr-dg-column>
-
+		    
 		    <clr-dg-placeholder>No positions yet, go update your data!</clr-dg-placeholder>
 
 		    <clr-dg-row *ngFor="let position of (profileService.userProfile|async)?.positions">
 		        <clr-dg-cell>{{ position.position.id }}</clr-dg-cell>
 		        <clr-dg-cell>{{ position.position.name }}</clr-dg-cell>
 		        <clr-dg-cell>{{ position.position.level }}</clr-dg-cell>
+		        <clr-dg-cell>{{ position.is_current }}</clr-dg-cell>
+		        
 		        <clr-dg-cell>
 		        	<a href="{{position.url}}">{{ position.url }}</a>
 		        </clr-dg-cell>

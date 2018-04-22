@@ -11,13 +11,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserService } from './user.service';
 import { ProfileService } from './profile.service';
+import { AuthGuardService } from './auth-guard.service';
 
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'admin', component: AdminComponent},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'login', component: LoginComponent, canActivate: [AuthGuardService]},
+  {path: 'admin', component: AdminComponent, canActivate: [AuthGuardService]},
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]}
 ]
 
 
@@ -38,7 +39,8 @@ const routes: Routes = [
   ],
   providers: [
     UserService,
-    ProfileService
+    ProfileService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

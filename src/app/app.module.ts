@@ -12,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserService } from './user.service';
 import { ProfileService } from './profile.service';
 import { AuthGuardService } from './auth-guard.service';
+import { ChartComponent } from './chart/chart.component';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
     LoginComponent,
     AdminComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,

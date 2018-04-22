@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { Token, Profile, User } from './models';
 
 
@@ -9,7 +9,7 @@ import { Token, Profile, User } from './models';
 export class UserService {
 	token: string;
 	isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(null);
-	authenticationError: BehaviorSubject<Error> = new BehaviorSubject(null);
+	authenticationError: ReplaySubject<HttpErrorResponse> = new ReplaySubject(1);
   me: Observable<User>;
   profiles: Observable<Profile[]>;
   picture: Observable<string>;
@@ -110,7 +110,7 @@ export class UserService {
             localStorage.setItem("tangent-key", this.token);
           }
   			},
-  			(error: Error) => {
+  			(error: HttpErrorResponse) => {
   				this.authenticationError.next(error);
   			}
   		)

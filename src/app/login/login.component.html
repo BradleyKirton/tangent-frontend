@@ -34,7 +34,7 @@
             <div
             	*ngIf="errorMessage"
             	class="error active">
-                {{ user.authenticationError | async }}
+                {{ errorMessage }}
             </div>
 
 			<button

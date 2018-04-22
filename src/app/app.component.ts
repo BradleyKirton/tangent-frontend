@@ -27,9 +27,7 @@ export class AppComponent implements OnInit {
     });
 
   	this.userService.isAuthenticated.subscribe( (isAuthenticated) => {
-  		if (!isAuthenticated) {
-  			// this.router.navigate(['login']);
-  		} else {
+  		if (isAuthenticated) {
   			this.userService.me.subscribe( (user: User) => {
           let lastRoute = localStorage.getItem("last-route");
 

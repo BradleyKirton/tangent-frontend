@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from './user.service';
+import { ProfileService } from './profile.service';
 import { User } from './models';
 
 
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
 
   constructor(
   	private userService: UserService,
+    private profileService: ProfileService,
   	private router: Router
   ) { }
 
@@ -45,5 +47,15 @@ export class AppComponent implements OnInit {
 
   		this.showLogin = !isAuthenticated;
   	})
+  }
+
+  /**
+    Navigate to the current user's profile
+  */
+  navigateProfile() {
+    this.userService.me.subscribe((user: User) => {
+      this.profileService.filterForUser(user);
+      this.router.navigate(['profile']);
+    });
   }
 }

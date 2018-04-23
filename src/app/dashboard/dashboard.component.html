@@ -1,9 +1,37 @@
 <div class="row">
 	<div class="col-sm-4">
-		<canvas 
-			baseChart
-			chartType="bar"
-			[datasets]="barChartData">	
-		</canvas>
+		
+        <div class="card">
+            <div class="card-header">
+                Number of employees
+            </div>
+            <div class="card-block">
+				<h1 class="h1">{{ (userService.profiles|async)?.length }}</h1>
+            </div>
+        </div>
+
+	</div>
+
+	<div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+                Age Distribution
+            </div>
+            <div class="card-block">
+				
+            	<div #ageDistribution></div>
+            </div>
+        </div>
+	</div>
+
+	<div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+                Gender Distribution
+            </div>
+            <div class="card-block">
+            	<div #genderDistribution></div>
+            </div>
+        </div>
 	</div>
 </div>

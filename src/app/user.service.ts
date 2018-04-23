@@ -28,7 +28,6 @@ export class UserService {
       .subscribe( (isAuthenticated) => {
         this.refreshUser();
         this.refreshProfiles();
-        this.refreshProfilePic();
     });
   }
   
@@ -39,26 +38,6 @@ export class UserService {
     return {
       'Authorization': `Token ${this.token}`
     };
-  }
-
-  /**
-    Fetch a random profile pic for the user
-  */
-  getProfilePic() {
-    let subject = new BehaviorSubject(null);
-    this.http.get('https://randomuser.me/api/')
-      .subscribe( (response: any) => {
-        subject.next(response.results[0].picture.large);
-      })
-
-    return subject
-  }
-  
-  /**
-    Refresh the service picture
-  */
-  refreshProfilePic() {
-    this.picture = this.getProfilePic();
   }
 
   /**

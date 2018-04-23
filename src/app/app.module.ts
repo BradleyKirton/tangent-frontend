@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ClarityModule } from "@clr/angular";
 import { RouterModule, Routes } from '@angular/router';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
@@ -36,8 +35,7 @@ const routes: Routes = [
     ClarityModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes),
-    ChartsModule
+    RouterModule.forRoot(routes)
   ],
   providers: [
     UserService,

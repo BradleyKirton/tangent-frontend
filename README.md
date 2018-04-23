@@ -1,6 +1,18 @@
 # Tangent assignment frontend
 
-Angular frontend for the tangent assignment.
+Angular frontend for the tangent assignment. 
+
+# Installation
+```bash
+git clone https://github.com/BradleyKirton/tangent-frontent
+cd tangent-frontent
+npm install
+```
+
+# Building the application
+```bash
+$(npm bin)/ng build
+```
 
 # Running the build
 

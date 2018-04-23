@@ -1,8 +1,9 @@
 <div class="row">
 	<div class="col-sm-4">
-		<vega-chart 
-			#example
-			[header]="'Employee age distribution'">
-		</vega-chart>	
+		<canvas 
+			baseChart
+			chartType="bar"
+			[datasets]="barChartData">	
+		</canvas>
 	</div>
 </div>

@@ -14,7 +14,7 @@
 	        <div class="card-block">
 	            
 	            <div class="card-media-block">    
-	                <img src="{{profileService.userService.picture|async}}">
+	                <img src="{{ (profileService.userProfile|async)?.picture_uri }}">
 
 	                <div class="card-media-description">
 	                    <span class="card-media-title">
